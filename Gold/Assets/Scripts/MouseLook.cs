@@ -8,6 +8,8 @@ public class MouseLook : MonoBehaviour {
     [SerializeField]
     Transform playerBody;
 
+    float moveSpeed = 1.0f;
+
     float xRotation = 0f;
 
     // Start is called before the first frame update

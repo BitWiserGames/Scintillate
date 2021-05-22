@@ -21,6 +21,9 @@ public class MazeRenderer : MonoBehaviour {
     [SerializeField]
     private Transform playerPrefab = null;
 
+    [SerializeField]
+    private Transform coinPrefab = null;
+
     // Start is called before the first frame update
     void Start() {
         WallState[,] maze = MazeGenerator.Generate(width, height);
@@ -39,6 +42,11 @@ public class MazeRenderer : MonoBehaviour {
             for (int y = 0; y < height; ++y) {
                 WallState cell = maze[x, y];
                 Vector3 position = new Vector3((-width / 2 + x) * size, 0, (-height / 2 + y) * size);
+
+                if (x % 2 == 0 && y % 2 == 0) {
+                    Transform coin = Instantiate(coinPrefab, transform);
+                    coin.position = position + new Vector3(0, 2, 0);
+                }
 
                 if (cell.HasFlag(WallState.UP)) {
                     Transform topWall = Instantiate(wallPrefab, transform);
