@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour {
     }
 
     void Pickup(Collider player) {
-        // Play sound
+        FindObjectOfType<AudioManager>().Play("CoinPickup");
 
         player.GetComponent<PlayerController>().addCoin();
 
