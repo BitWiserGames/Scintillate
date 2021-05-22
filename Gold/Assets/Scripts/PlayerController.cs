@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour {
         --coins;
     }
 
+    public int getCoins() {
+        return coins;
+    }
+
     private void Start() {
         jumpVel = (jumpTime * -gravity) / 2f;
     }
