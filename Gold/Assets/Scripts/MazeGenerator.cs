@@ -35,25 +35,25 @@ public static class MazeGenerator {
     }
 
     private static WallState[,] RecursiveBacktracker(WallState[,] maze, uint width, uint height) {
-        var rng = new System.Random();
+        System.Random rng = new System.Random();
 
-        var positionStack = new Stack<Position>();
-        var position = new Position { X = 0, Y = 0 };
+        Stack<Position> positionStack = new Stack<Position>();
+        Position position = new Position { X = 0, Y = 0 };
 
         maze[position.X, position.Y] |= WallState.VISITED; // 1000 1111
         positionStack.Push(position);
 
         while (positionStack.Count > 0) {
-            var current = positionStack.Pop();
-            var neighbors = GetUnvisitedNeighbors(current, maze, width, height);
+            Position current = positionStack.Pop();
+            List<Neighbor> neighbors = GetUnvisitedNeighbors(current, maze, width, height);
 
             if (neighbors.Count > 0) {
                 positionStack.Push(current);
 
-                var randIndex = rng.Next(0, neighbors.Count);
-                var randomNeighbor = neighbors[randIndex];
+                int randIndex = rng.Next(0, neighbors.Count);
+                Neighbor randomNeighbor = neighbors[randIndex];
 
-                var nPosition = randomNeighbor.Position;
+                Position nPosition = randomNeighbor.Position;
 
                 maze[current.X, current.Y] &= ~randomNeighbor.SharedWall;
                 maze[nPosition.X, nPosition.Y] &= ~GetOppositeWall(randomNeighbor.SharedWall);

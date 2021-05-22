@@ -18,53 +18,70 @@ public class MazeRenderer : MonoBehaviour {
     [SerializeField]
     private Transform floorPrefab = null;
 
+    [SerializeField]
+    private Transform playerPrefab = null;
+
+    [SerializeField]
+    private Transform coinPrefab = null;
+
     // Start is called before the first frame update
     void Start() {
-        var maze = MazeGenerator.Generate(width, height);
+        WallState[,] maze = MazeGenerator.Generate(width, height);
 
         Draw(maze);
+        SpawnPlayer();
     }
 
     private void Draw(WallState[,] maze) {
-        var floor = Instantiate(floorPrefab, transform);
-        floor.localScale = new Vector3(width / 10, 1, height / 10);
-        floor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(width, height);
+        Transform floor = Instantiate(floorPrefab, transform);
+        floor.position = new Vector3(-0.5f * size, 0, -0.5f * size);
+        floor.localScale = new Vector3((width / 10) * size, 1 * size, (height / 10) * size);
+        floor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(width * size, height * size);
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
-                var cell = maze[x, y];
-                var position = new Vector3(-width / 2 + x, 0, -height / 2 + y);
+                WallState cell = maze[x, y];
+                Vector3 position = new Vector3((-width / 2 + x) * size, 0, (-height / 2 + y) * size);
+
+                if (x % 2 == 0 && y % 2 == 0) {
+                    Transform coin = Instantiate(coinPrefab, transform);
+                    coin.position = position + new Vector3(0, 2, 0);
+                }
 
                 if (cell.HasFlag(WallState.UP)) {
-                    var topWall = Instantiate(wallPrefab, transform) as Transform;
+                    Transform topWall = Instantiate(wallPrefab, transform);
                     topWall.position = position + new Vector3(0, 0, size / 2);
-                    topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
+                    topWall.localScale = new Vector3(topWall.localScale.x * size, topWall.localScale.y * size, topWall.localScale.z * size);
                 }
 
                 if (cell.HasFlag(WallState.LEFT)) {
-                    var leftWall = Instantiate(wallPrefab, transform) as Transform;
+                    Transform leftWall = Instantiate(wallPrefab, transform) as Transform;
                     leftWall.position = position + new Vector3(-size / 2, 0, 0);
-                    leftWall.localScale = new Vector3(size, leftWall.localScale.y, leftWall.localScale.z);
+                    leftWall.localScale = new Vector3(leftWall.localScale.x * size, leftWall.localScale.y * size, leftWall.localScale.z * size);
                     leftWall.eulerAngles = new Vector3(0, 90, 0);
                 }
 
                 if (x == width - 1) {
                     if (cell.HasFlag(WallState.RIGHT)) {
-                        var rightWall = Instantiate(wallPrefab, transform) as Transform;
+                        Transform rightWall = Instantiate(wallPrefab, transform) as Transform;
                         rightWall.position = position + new Vector3(size / 2, 0, 0);
-                        rightWall.localScale = new Vector3(size, rightWall.localScale.y, rightWall.localScale.z);
+                        rightWall.localScale = new Vector3(rightWall.localScale.x * size, rightWall.localScale.y * size, rightWall.localScale.z * size);
                         rightWall.eulerAngles = new Vector3(0, 90, 0);
                     }
                 }
 
                 if (y == 0) {
                     if (cell.HasFlag(WallState.DOWN)) {
-                        var bottomWall = Instantiate(wallPrefab, transform) as Transform;
+                        Transform bottomWall = Instantiate(wallPrefab, transform) as Transform;
                         bottomWall.position = position + new Vector3(0, 0, -size / 2);
-                        bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
+                        bottomWall.localScale = new Vector3(bottomWall.localScale.x * size, bottomWall.localScale.y * size, bottomWall.localScale.z * size);
                     }
                 }
             }
         }
+    }
+
+    private void SpawnPlayer() {
+        Transform floor = Instantiate(playerPrefab, new Vector3(-0.5f * width * size, 0.2f, -0.5f * height * size), transform.rotation);
     }
 }
