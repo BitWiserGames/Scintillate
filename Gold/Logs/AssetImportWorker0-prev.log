@@ -1,0 +1,237 @@
+Using pre-set license
+Built from '2020.2/release' branch; Version is '2020.2.2f1 (068178b99f32) revision 426360'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19041.985; Version 2004; 64bit' Language: 'en' Physical Memory: 16330 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.2.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+E:/Documents/GitRepos/Gold/Gold
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+54177
+Successfully changed project path to: E:/Documents/GitRepos/Gold/Gold
+E:/Documents/GitRepos/Gold/Gold
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 24.62 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.2.2f1 (068178b99f32)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Documents/GitRepos/Gold/Gold/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 6GB (ID=0x1c03)
+    Vendor:   
+    VRAM:     6052 MB
+    Driver:   27.21.14.6140
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56888
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/LuminSupport/UnityEditor.Lumin.Extensions.dll
+Registered in 0.003540 seconds.
+Native extension for Lumin target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 23.41 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.305 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.000505 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.010 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.20 seconds
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1099 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 56.5 MB.
+System memory in use after: 56.6 MB.
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1541.
+Total: 1.967800 ms (FindLiveObjects: 0.214700 ms CreateObjectMapping: 0.151900 ms MarkObjects: 1.538200 ms  DeleteObjects: 0.061300 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97ffb14b5ac28eb1aee5ba5408602d95') in 0.604007 seconds
+  Import took 0.606712 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 108.035372 seconds.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff9d98807575c2b537bfd70385fd40d0') in 0.071766 seconds
+  Import took 0.075587 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 219.485882 seconds.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a651b2df0c3cd1c4aa5496cca998679') in 0.037787 seconds
+  Import took 0.040669 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.863704 seconds.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b88aaea5a8503cb69ae108b6e8af5ed') in 0.040042 seconds
+  Import took 0.042588 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 56.785412 seconds.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71102c5dfb911b7042bd793721dd25b7') in 0.467309 seconds
+  Import took 0.483055 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.570589 seconds.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c39fb1dcb412c473e485c66cf4525156') in 0.712627 seconds
+  Import took 0.715933 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 710.305145 seconds.
+  path: Assets/Models/bubblebuddy.fbx
+  artifactKey: Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/bubblebuddy.fbx using Guid(4f6fdff2a86432d4696b14f7914f5a13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2578e51b61d58beaebf84ce86472edbc') in 0.045425 seconds
+  Import took 0.051341 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000498 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.19 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.033 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.20 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1093 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 71.5 MB.
+System memory in use after: 71.5 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1554.
+Total: 1.441000 ms (FindLiveObjects: 0.134400 ms CreateObjectMapping: 0.036100 ms MarkObjects: 1.251400 ms  DeleteObjects: 0.018100 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 204.820956 seconds.
+  path: Assets/Models
+  artifactKey: Guid(a9fe8bfa77cbfe64fbf85e5a86d62de6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models using Guid(a9fe8bfa77cbfe64fbf85e5a86d62de6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44eab3f42b08dd0716a1988721f0a60c') in 0.011612 seconds
+  Import took 0.013545 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003131 seconds.
+  path: Assets/Models
+  artifactKey: Guid(a9fe8bfa77cbfe64fbf85e5a86d62de6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models using Guid(a9fe8bfa77cbfe64fbf85e5a86d62de6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44eab3f42b08dd0716a1988721f0a60c') in 0.003375 seconds
+  Import took 0.005162 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.474908 seconds.
+  path: Assets
+  artifactKey: Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets using Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a6e520b92ccfc61bcfa21a7bcab8468') in 0.013268 seconds
+  Import took 0.018392 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.117060 seconds.
+  path: Assets/Animations
+  artifactKey: Guid(7b5a0611100f1144c8a295207c060adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations using Guid(7b5a0611100f1144c8a295207c060adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e80c0342c6b639960c6daf8353e9c89b') in 0.008004 seconds
+  Import took 0.010590 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.553342 seconds.
+  path: Assets/Animations/BubbleBuddyController.controller
+  artifactKey: Guid(bb8aa20ee8e0c114f8d5a13203c559fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/BubbleBuddyController.controller using Guid(bb8aa20ee8e0c114f8d5a13203c559fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aee5baeb94c971598da06f36725f28ae') in 0.029990 seconds
+  Import took 0.031976 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000833 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for Lumin target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.760 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1475 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 89.6 MB.
+System memory in use after: 89.6 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1935.
+Total: 2.236600 ms (FindLiveObjects: 0.166100 ms CreateObjectMapping: 0.055200 ms MarkObjects: 1.942900 ms  DeleteObjects: 0.070300 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
