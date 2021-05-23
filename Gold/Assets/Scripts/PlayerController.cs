@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour {
     Transform groundCheck;
 
     [SerializeField]
+    Transform coinPrefab;
+
+    CoinDisplay coinDisplay;
+
+    [SerializeField]
     float speed = 12f;
 
     [SerializeField]
@@ -24,7 +29,12 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     LayerMask groundMask;
 
+    [SerializeField]
+    AudioSource footstepSource = null;
+
     Vector3 velocity;
+
+    AudioManager audioManager = null;
 
     bool isGrounded;
     float jumpTime = 32f / 30f;
@@ -32,25 +42,47 @@ public class PlayerController : MonoBehaviour {
 
     int coins = 0;
 
+    WorldState worldState = null;
+
+    bool coinJiggleEnabled = false;
+
     public void addCoin() {
         ++coins;
+        coinDisplay.SetCoinCount(coins);
+
+        if (!worldState.isInDoomMode() && coins >= 3) {
+            worldState.startDoomMode();
+        }
     }
 
     public void removeCoin() {
-        --coins;
-    }
+        if (coins > 0) {
+            // Physically drop coin
+            Transform coin = Instantiate(coinPrefab);
 
-    public int getCoins() {
-        return coins;
+            if (Physics.Raycast(transform.position, transform.forward * -3, 1)) {
+                coin.position = transform.position + (transform.forward * 3) + (transform.up * 0.8f);
+            }
+            else {
+                coin.position = transform.position + (transform.forward * -3) + (transform.up * 0.8f);
+            }
+
+            // Remove coin
+            --coins;
+            coinDisplay.SetCoinCount(coins);
+        }
     }
 
     private void Start() {
-        jumpVel = (jumpTime * -gravity) / 2f;
+        coinDisplay = FindObjectOfType<CoinDisplay>();
+        worldState = FindObjectOfType<WorldState>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
     void Update() {
         speed = getSpeed(coins);
+        jumpVel = getJump(coins);
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -63,8 +95,19 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 move = ((transform.right * x + transform.forward * z).normalized / 2) * speed;
 
-        if (Input.GetButton("Sprint") && isGrounded && z > 0) {
+        if (Input.GetButton("Sprint") && isGrounded && z > 0) { // Moving forward, not backwards
             move *= 2;
+
+            if (!coinJiggleEnabled && coins >= 2) {
+                coinJiggleEnabled = true;
+                audioManager.Play("CoinBagShake");
+            }
+        }
+        else {
+            if (coinJiggleEnabled) {
+                coinJiggleEnabled = false;
+                audioManager.Stop("CoinBagShake");
+            }
         }
 
         if (z < 0) {
@@ -75,9 +118,20 @@ public class PlayerController : MonoBehaviour {
 
         controller.Move(move * Time.deltaTime);
 
+        if (move.magnitude > 0) {
+            footstepSource.enabled = true;
+        }
+        else {
+            footstepSource.enabled = false;
+        }
+
         if (Input.GetButtonDown("Jump") && isGrounded) {
             velocity.y = jumpVel;
             animator.SetTrigger("Jump");
+        }
+
+        if (Input.GetButtonDown("Drop")) {
+            removeCoin();
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -87,6 +141,10 @@ public class PlayerController : MonoBehaviour {
 
     float getSpeed(int coins) {
         return 12f + Mathf.Round(Mathf.Exp((coins - 14.9f) / -6) - 12);
+    }
+
+    float getJump(int coins) {
+        return ((jumpTime * -gravity) / 2f) * ((20f - coins) / 20f);
     }
 
 }
