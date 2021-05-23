@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3334190009174761781}
   - component: {fileID: 840214001887818902}
   - component: {fileID: 4655937228039615490}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -68,12 +68,14 @@ MonoBehaviour:
   animator: {fileID: 6912123064799153071}
   controller: {fileID: 3334190009174761781}
   groundCheck: {fileID: 734146017959328815}
+  coinPrefab: {fileID: 3713231256190285053, guid: 47f605f3475b18d418a7d98be30f2e7c, type: 3}
   speed: 12
   gravity: -19.62
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  footstepSource: {fileID: 4655937228039615490}
 --- !u!82 &4655937228039615490
 AudioSource:
   m_ObjectHideFlags: 0
@@ -81,7 +83,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3334190009174761782}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a23256090b0941d4c93e5ad4a9580330, type: 3}

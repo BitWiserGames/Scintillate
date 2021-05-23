@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour {
-    [SerializeField]
-    private uint width = 10;
+    public static uint width = 50;
 
-    [SerializeField]
-    private uint height = 10;
+    public static uint height = 50;
 
-    [SerializeField]
-    private float size = 1f;
+    public static float size = 8f;
 
     [SerializeField]
     private Transform wallPrefab = null;
@@ -24,12 +21,15 @@ public class MazeRenderer : MonoBehaviour {
     [SerializeField]
     private Transform coinPrefab = null;
 
+    [SerializeField]
+    UnityEngine.AI.NavMeshSurface surface = null;
+
     // Start is called before the first frame update
     void Start() {
         WallState[,] maze = MazeGenerator.Generate(width, height);
 
-        Draw(maze);
         SpawnPlayer();
+        Draw(maze);
     }
 
     private void Draw(WallState[,] maze) {
@@ -79,9 +79,11 @@ public class MazeRenderer : MonoBehaviour {
                 }
             }
         }
+
+        surface.BuildNavMesh();
     }
 
     private void SpawnPlayer() {
-        Transform floor = Instantiate(playerPrefab, new Vector3(-0.5f * width * size, 0.2f, -0.5f * height * size), transform.rotation);
+        Transform player = Instantiate(playerPrefab, new Vector3(-0.5f * width * size, 0.2f, -0.5f * height * size), transform.rotation);
     }
 }

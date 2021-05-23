@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin : MonoBehaviour {
+    AudioManager am = null;
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
@@ -10,8 +11,12 @@ public class Coin : MonoBehaviour {
         }
     }
 
+    private void Start() {
+        am = FindObjectOfType<AudioManager>();
+    }
+
     void Pickup(Collider player) {
-        FindObjectOfType<AudioManager>().Play("CoinPickup");
+        am.Play("CoinPickup");
 
         player.GetComponent<PlayerController>().addCoin();
 
