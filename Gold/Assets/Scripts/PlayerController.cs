@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     Transform coinPrefab;
 
-    CoinDisplay coinDisplay;
+    [SerializeField]
+    Light flashlightLight;
 
     [SerializeField]
     float speed = 12f;
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField]
     AudioSource footstepSource = null;
+
+    CoinDisplay coinDisplay;
 
     Vector3 velocity;
 
@@ -132,6 +135,11 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Drop")) {
             removeCoin();
+        }
+
+        if (Input.GetButtonDown("Flashlight")) {
+            flashlightLight.enabled = !flashlightLight.enabled;
+            audioManager.Play("Flashlight");
         }
 
         velocity.y += gravity * Time.deltaTime;
