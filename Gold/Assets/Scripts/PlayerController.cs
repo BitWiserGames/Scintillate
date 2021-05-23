@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     AudioSource footstepSource = null;
 
+    [SerializeField]
+    LayerMask enemyLayer;
+
+    public MouseLook mouseLookScript = null;
+
     CoinDisplay coinDisplay;
 
     Vector3 velocity;
@@ -48,6 +53,26 @@ public class PlayerController : MonoBehaviour {
     WorldState worldState = null;
 
     bool coinJiggleEnabled = false;
+
+    public void KillPlayer() {
+        // Disable enemies
+        for (int i = 0; i < 4; ++i) {
+            WorldState.enemies[i].GetComponent<EnemyController>().enabled = false;
+            WorldState.enemies[i].GetComponent<Animator>().enabled = false;
+        }
+
+        // Disable player
+        this.enabled = false;
+        this.animator.SetFloat("Speed", 0);
+        this.audioManager.Stop("CoinBagShake");
+        footstepSource.enabled = false;
+        mouseLookScript.enabled = false;
+
+        // Ragdoll
+
+        // Show death message
+        // Show score
+    }
 
     public void addCoin() {
         ++coins;
@@ -110,6 +135,11 @@ public class PlayerController : MonoBehaviour {
             if (coinJiggleEnabled) {
                 coinJiggleEnabled = false;
                 audioManager.Stop("CoinBagShake");
+
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 50, enemyLayer);
+                foreach (var hitCollider in hitColliders) {
+                    hitCollider.GetComponent<EnemyController>().SetTarget(transform.position);
+                }
             }
         }
 
