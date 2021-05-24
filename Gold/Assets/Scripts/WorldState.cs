@@ -12,13 +12,33 @@ public class WorldState : MonoBehaviour {
     [SerializeField]
     RenderTexture[] renderTextures;
 
+    public GameObject pauseMenu;
+
     Camera cam;
 
     bool doomModeStarted = false;
 
     AudioManager am = null;
 
+    static bool paused = false;
+
     public static Transform[] enemies = new Transform[4];
+
+    public void PauseGame() {
+        paused = !paused;
+
+        if (paused) {
+            pauseMenu.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.Confined;
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    public static bool IsPaused() {
+        return paused;
+    }
 
     public bool isInDoomMode() {
         return doomModeStarted;
@@ -31,6 +51,7 @@ public class WorldState : MonoBehaviour {
 
         am.Stop("ThemeCalm");
         am.Play("ThemeDoom");
+        am.Play("MonsterScream");
 
         // Spawn enemy
         enemies[0] = Instantiate(enemyPrefab, new Vector3(-0.5f * MazeRenderer.width * MazeRenderer.size, 0.2f, -0.5f * MazeRenderer.height * MazeRenderer.size), transform.rotation);
@@ -50,5 +71,7 @@ public class WorldState : MonoBehaviour {
 
     private void Start() {
         am = FindObjectOfType<AudioManager>();
+
+        pauseMenu.SetActive(false);
     }
 }

@@ -5,12 +5,15 @@ using UnityEngine;
 
 [Flags]
 public enum WallState {
-    LEFT = 1, // 0001
-    RIGHT = 2, // 0010
-    UP = 4, // 0100
-    DOWN = 8, // 1000
+    LEFT = 1,      // 0000 0000 0001
+    RIGHT = 2,     // 0000 0000 0010
+    UP = 4,        // 0000 0000 0100
+    DOWN = 8,      // 0000 0000 1000
 
-    VISITED = 128 // 1000 0000
+    VISITED = 16,  // 0000 0001 0000
+
+    COIN = 256,    // 0001 0000 0000
+    GATE = 512     // 0010 0000 0000
 }
 
 public struct Position {
@@ -55,15 +58,34 @@ public static class MazeGenerator {
 
                 Position nPosition = randomNeighbor.Position;
 
+                // Remove walls
                 maze[current.X, current.Y] &= ~randomNeighbor.SharedWall;
                 maze[nPosition.X, nPosition.Y] &= ~GetOppositeWall(randomNeighbor.SharedWall);
+
+                if (rng.Next(0, 100) <= 3) {
+                    bool valid = true;
+
+                    for (int i = current.X - 1; i < current.X + 1; ++i) {
+                        for (int j = current.Y - 1; j < current.Y + 1; ++j) {
+                            if (i >= 0 && i < width && j >= 0 && j < height)
+                            if (maze[i, j].HasFlag(WallState.COIN)) {
+                                valid = false;
+                                break;
+                            }
+                        }
+                        if (!valid)
+                            break;
+                    }
+                    if (valid)
+                        maze[current.X, current.Y] |= WallState.COIN;
+                }
 
                 maze[nPosition.X, nPosition.Y] |= WallState.VISITED;
 
                 positionStack.Push(nPosition);
             }
         }
-        
+
         return maze;
     }
 
@@ -120,7 +142,7 @@ public static class MazeGenerator {
 
         return list;
     }
-        
+
     public static WallState[,] Generate(uint width, uint height) {
         WallState[,] maze = new WallState[width, height];
 

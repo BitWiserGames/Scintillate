@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour {
-    public static uint width = 50;
+    public static uint width = 25;
 
-    public static uint height = 50;
+    public static uint height = 25;
 
     public static float size = 8f;
 
@@ -35,15 +35,15 @@ public class MazeRenderer : MonoBehaviour {
     private void Draw(WallState[,] maze) {
         Transform floor = Instantiate(floorPrefab, transform);
         floor.position = new Vector3(-0.5f * size, 0, -0.5f * size);
-        floor.localScale = new Vector3((width / 10) * size, 1 * size, (height / 10) * size);
+        floor.localScale = new Vector3((width / 10f) * size, 1 * size, (height / 10f) * size);
         floor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(width * size, height * size);
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
                 WallState cell = maze[x, y];
-                Vector3 position = new Vector3((-width / 2 + x) * size, 0, (-height / 2 + y) * size);
+                Vector3 position = new Vector3((-width / 2f + x) * size, 0, (-height / 2f + y) * size);
 
-                if (x % 2 == 0 && y % 2 == 0) {
+                if (cell.HasFlag(WallState.COIN)) {
                     Transform coin = Instantiate(coinPrefab, transform);
                     coin.position = position + new Vector3(0, 2, 0);
                 }
