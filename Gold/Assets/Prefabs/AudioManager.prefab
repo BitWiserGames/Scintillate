@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6959651838654746265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6959651838654746271}
+  - component: {fileID: 6959651838654746270}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6959651838654746271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959651838654746265}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.5269165, y: 8.374633, z: 11.783978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6959651838654746270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959651838654746265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73176190860f3774b8269fa32e24558b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ThemeCalm
+    clip: {fileID: 8300000, guid: 6890cd5dc13eff249a7aac395c11be9f, type: 3}
+    group: {fileID: 2905102364251620307, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: ThemeDoom
+    clip: {fileID: 8300000, guid: ff544d48402ae06418961dbe1b99db24, type: 3}
+    group: {fileID: 2905102364251620307, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: CoinPickup
+    clip: {fileID: 8300000, guid: 05b8cbc5cbddcef4cbe5f57b04ca3293, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CoinBagShake
+    clip: {fileID: 8300000, guid: a2a9476e07de0454e9041e43fdffe4a0, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Flashlight
+    clip: {fileID: 8300000, guid: 47b9e080eecb9664bab71f7edb8c07d6, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MonsterScream
+    clip: {fileID: 8300000, guid: e782c7e4dc595514f9cde1930b0dd324, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MonsterWalk
+    clip: {fileID: 8300000, guid: d96190e5cdd7a0a4190a38d03f654bd3, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: PlayerWalk
+    clip: {fileID: 8300000, guid: a23256090b0941d4c93e5ad4a9580330, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: 8046f2fc7a35a6142ac47a3631a33ab4, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerRun
+    clip: {fileID: 8300000, guid: 7035d0cd97912264ca567262cf3bd5b6, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 0.85
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MonsterRun
+    clip: {fileID: 8300000, guid: d4409fd95dd1fa241b59e955691eb403, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: CoinBagShakeWalk
+    clip: {fileID: 8300000, guid: 59a14b365f662a84aab480e3185fdaf3, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Gate
+    clip: {fileID: 8300000, guid: a4670c6c3206b71429081b33fdce420a, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
