@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Start() {
+        agent.speed = 3.5f;
         player = FindObjectOfType<PlayerController>();
     }
 
