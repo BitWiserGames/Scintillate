@@ -1,21 +1,47 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+    public static float masterVal = 1f;
+    public static float sfxVal = 1f;
+    public static float musicVal = 1f;
+
+
+
     public AudioMixer mixer;
+    public Slider master;
+    public Slider sfx;
+    public Slider music;
+    public Slider sensitivity;
+
+
+    private void Start() {
+        sensitivity.value = MouseLook.mouseMult;
+        master.value = Mathf.Pow(10f, masterVal / 20f);
+        sfx.value = Mathf.Pow(10f, sfxVal / 20f);
+        music.value = Mathf.Pow(10f, musicVal / 20f);
+    }
 
     public void SetMaster(float volume) {
-        mixer.SetFloat("Master", Mathf.Log10(volume) * 20);
+        masterVal = Mathf.Log10(volume) * 20f;
+        mixer.SetFloat("Master", masterVal);
     }
 
     public void SetSFX(float volume) {
-        mixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        sfxVal = Mathf.Log10(volume) * 20f;
+        mixer.SetFloat("SFX", sfxVal);
     }
 
     public void SetMusic(float volume) {
-        mixer.SetFloat("Music", Mathf.Log10(volume) * 20);
+        musicVal = Mathf.Log10(volume) * 20f;
+        mixer.SetFloat("Music", musicVal);
+    }
+
+    public void SetSensitivity(float sensitivity) {
+        MouseLook.mouseMult = sensitivity;
     }
 
     public void ChangeScene(int index) {

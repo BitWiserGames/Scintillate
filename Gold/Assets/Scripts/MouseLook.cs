@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour {
     [SerializeField]
     Transform playerBody;
 
-    float moveSpeed = 1.0f;
+    public static float mouseMult = 1.0f;
 
     float xRotation = 0f;
 
@@ -19,8 +19,8 @@ public class MouseLook : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * mouseMult * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * mouseMult * Time.deltaTime;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 65f);

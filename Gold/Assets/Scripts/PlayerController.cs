@@ -31,9 +31,6 @@ public class PlayerController : MonoBehaviour {
     LayerMask groundMask;
 
     [SerializeField]
-    AudioSource footstepSource = null;
-
-    [SerializeField]
     LayerMask enemyLayer;
 
     public MouseLook mouseLookScript = null;
@@ -65,7 +62,6 @@ public class PlayerController : MonoBehaviour {
         this.enabled = false;
         this.animator.SetFloat("Speed", 0);
         this.audioManager.Stop("CoinBagShake");
-        footstepSource.enabled = false;
         mouseLookScript.enabled = false;
 
         // Ragdoll
@@ -150,13 +146,6 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat("Speed", (move.magnitude * (z > 0 ? 1 : -1)) / 12f);
 
         controller.Move(move * Time.deltaTime);
-
-        if (move.magnitude > 0) {
-            footstepSource.enabled = true;
-        }
-        else {
-            footstepSource.enabled = false;
-        }
 
         if (Input.GetButtonDown("Jump") && isGrounded) {
             velocity.y = jumpVel;
