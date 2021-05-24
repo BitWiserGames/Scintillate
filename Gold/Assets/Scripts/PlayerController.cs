@@ -105,68 +105,77 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        speed = getSpeed(coins);
-        jumpVel = getJump(coins);
+        if (!WorldState.IsPaused()) {
+            speed = getSpeed(coins);
+            jumpVel = getJump(coins);
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y < 0) {
-            velocity.y = -2f;
-        }
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = ((transform.right * x + transform.forward * z).normalized / 2) * speed;
-
-        if (Input.GetButton("Sprint") && isGrounded && z > 0) { // Moving forward, not backwards
-            move *= 2;
-
-            if (!coinJiggleEnabled && coins >= 2) {
-                coinJiggleEnabled = true;
-                audioManager.Play("CoinBagShake");
+            if (isGrounded && velocity.y < 0) {
+                velocity.y = -2f;
             }
 
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 move = ((transform.right * x + transform.forward * z).normalized / 2) * speed;
+
+            if (Input.GetButton("Sprint") && isGrounded && z > 0) { // Moving forward, not backwards
+                move *= 2;
+
+                if (!coinJiggleEnabled && coins >= 2) {
+                    coinJiggleEnabled = true;
+                    audioManager.Play("CoinBagShake");
+                }
+
+            }
+            else {
+                if (coinJiggleEnabled) {
+                    coinJiggleEnabled = false;
+                    audioManager.Stop("CoinBagShake");
+                }
+            }
+
+            if (coinJiggleEnabled) {
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 35, enemyLayer);
+                foreach (var hitCollider in hitColliders) {
+                    hitCollider.GetComponent<EnemyController>().SetTarget(transform.position);
+                }
+            }
+
+            if (z < 0) {
+                move *= 0.4f;
+            }
+
+            animator.SetFloat("Speed", (move.magnitude * (z > 0 ? 1 : -1)) / 12f);
+
+            controller.Move(move * Time.deltaTime);
+
+            if (Input.GetButtonDown("Jump") && isGrounded) {
+                velocity.y = jumpVel;
+                animator.SetTrigger("Jump");
+            }
+
+            if (Input.GetButtonDown("Drop")) {
+                removeCoin();
+            }
+
+            if (Input.GetButtonDown("Flashlight")) {
+                flashlightLight.enabled = !flashlightLight.enabled;
+                audioManager.Play("Flashlight");
+            }
+
+            if (Input.GetButtonDown("Cancel")) {
+                worldState.PauseGame();
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+
+            controller.Move(velocity * Time.deltaTime);
         }
         else {
-            if (coinJiggleEnabled) {
-                coinJiggleEnabled = false;
-                audioManager.Stop("CoinBagShake");
-            }
+            animator.SetFloat("Speed", 0);
         }
-
-        if (coinJiggleEnabled) {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 35, enemyLayer);
-            foreach (var hitCollider in hitColliders) {
-                hitCollider.GetComponent<EnemyController>().SetTarget(transform.position);
-            }
-        }
-
-        if (z < 0) {
-            move *= 0.4f;
-        }
-
-        animator.SetFloat("Speed", (move.magnitude * (z > 0 ? 1 : -1)) / 12f);
-
-        controller.Move(move * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded) {
-            velocity.y = jumpVel;
-            animator.SetTrigger("Jump");
-        }
-
-        if (Input.GetButtonDown("Drop")) {
-            removeCoin();
-        }
-
-        if (Input.GetButtonDown("Flashlight")) {
-            flashlightLight.enabled = !flashlightLight.enabled;
-            audioManager.Play("Flashlight");
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
     }
 
     float getSpeed(int coins) {
