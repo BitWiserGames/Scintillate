@@ -59,8 +59,9 @@ public class EnemyController : MonoBehaviour {
             lightLevel += (0.2126f * colors[i].r) + (0.7152f * colors[i].g) + (0.0722f * colors[i].b);
         }
 
-        if (lightLevel > 0)
+        if (lightLevel > 8000) {
             SetTarget(player.transform.position);
+        }
 
         if (agent.remainingDistance < 0.1) {
             agent.speed = 3.5f;

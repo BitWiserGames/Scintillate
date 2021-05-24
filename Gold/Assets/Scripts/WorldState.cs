@@ -31,6 +31,7 @@ public class WorldState : MonoBehaviour {
 
         am.Stop("ThemeCalm");
         am.Play("ThemeDoom");
+        am.Play("MonsterScream");
 
         // Spawn enemy
         enemies[0] = Instantiate(enemyPrefab, new Vector3(-0.5f * MazeRenderer.width * MazeRenderer.size, 0.2f, -0.5f * MazeRenderer.height * MazeRenderer.size), transform.rotation);

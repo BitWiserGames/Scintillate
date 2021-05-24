@@ -591,6 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8207008753515455591}
   - component: {fileID: 7371936810977055294}
+  - component: {fileID: 2226646721304588012}
   m_Layer: 7
   m_Name: Light Camera
   m_TagString: Untagged
@@ -606,7 +607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3033242899190590157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.96, z: 0.169}
+  m_LocalPosition: {x: 0, y: 1.96, z: 1.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3273916122089907473}
@@ -636,7 +637,7 @@ Camera:
     width: 0.6
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 90
   orthographic: 1
   orthographic size: 2.3414907
@@ -655,6 +656,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2226646721304588012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033242899190590157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8ac7a6849e8b945a1421210af13579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftEye: {fileID: 4449885422625568909}
+  rightEye: {fileID: 4268239775357751553}
 --- !u!1 &4119186013771698825
 GameObject:
   m_ObjectHideFlags: 0

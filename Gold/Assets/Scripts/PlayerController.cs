@@ -126,16 +126,19 @@ public class PlayerController : MonoBehaviour {
                 coinJiggleEnabled = true;
                 audioManager.Play("CoinBagShake");
             }
+
         }
         else {
             if (coinJiggleEnabled) {
                 coinJiggleEnabled = false;
                 audioManager.Stop("CoinBagShake");
+            }
+        }
 
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 50, enemyLayer);
-                foreach (var hitCollider in hitColliders) {
-                    hitCollider.GetComponent<EnemyController>().SetTarget(transform.position);
-                }
+        if (coinJiggleEnabled) {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 35, enemyLayer);
+            foreach (var hitCollider in hitColliders) {
+                hitCollider.GetComponent<EnemyController>().SetTarget(transform.position);
             }
         }
 
