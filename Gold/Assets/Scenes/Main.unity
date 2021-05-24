@@ -3210,6 +3210,7 @@ MonoBehaviour:
   floorPrefab: {fileID: 3480327650775123355, guid: 30437df6ed3e84d4cb73467bb8e8811e, type: 3}
   playerPrefab: {fileID: 3334190009174761780, guid: a98357ceca878184997495082e316146, type: 3}
   coinPrefab: {fileID: 3713231256190285053, guid: 47f605f3475b18d418a7d98be30f2e7c, type: 3}
+  entryPrefab: {fileID: 1645926974266857357, guid: 8109768dbf233ca47ae74c8253d0e9b2, type: 3}
   surface: {fileID: 685145929}
 --- !u!4 &1752157749
 Transform:
