@@ -29,9 +29,9 @@ public class WorldState : MonoBehaviour {
 
         if (paused) {
             pauseMenu.SetActive(true);
-
             Cursor.lockState = CursorLockMode.Confined;
-        } else {
+        }
+        else {
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
