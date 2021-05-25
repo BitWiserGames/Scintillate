@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour {
 
         // Ragdoll
 
-        // Show death message
+        worldState.LoseGame();
         // Show score
     }
 

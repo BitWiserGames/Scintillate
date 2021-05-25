@@ -14,6 +14,8 @@ public class WorldState : MonoBehaviour {
 
     public GameObject pauseMenu;
     public GameObject costText;
+    public GameObject loseScreen;
+    public GameObject winScreen;
 
     Camera cam;
 
@@ -34,7 +36,7 @@ public class WorldState : MonoBehaviour {
 
     }
 
-    public static void ActivateSwitch() {
+    public void ActivateSwitch() {
         ++switchesActivated;
 
         if (switchesActivated >= switchesNeeded) {
@@ -42,8 +44,14 @@ public class WorldState : MonoBehaviour {
         }
     }
 
-    public static void WinGame() {
+    public void WinGame() {
+        PauseGame();
+        winScreen.SetActive(true);
+    }
 
+    public void LoseGame() {
+        PauseGame();
+        loseScreen.SetActive(true);
     }
 
     public void PauseGame() {
@@ -67,6 +75,12 @@ public class WorldState : MonoBehaviour {
 
     public void startDoomMode() {
         cam = FindObjectOfType<Camera>();
+
+        Interactable[] interactables = FindObjectsOfType<Interactable>();
+
+        foreach (Interactable n in interactables)
+            if (n.isSwitch)
+                n.SetSwitch();
 
         doomModeStarted = true;
 
@@ -94,5 +108,7 @@ public class WorldState : MonoBehaviour {
         am = FindObjectOfType<AudioManager>();
 
         pauseMenu.SetActive(false);
+        loseScreen.SetActive(false);
+        winScreen.SetActive(false);
     }
 }
