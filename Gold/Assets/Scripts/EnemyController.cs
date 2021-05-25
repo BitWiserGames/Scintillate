@@ -24,13 +24,13 @@ public class EnemyController : MonoBehaviour {
     public static PlayerController player;
 
     bool sprint = false;
-    
+
     bool runSoundEnabled = false;
     bool walkSoundEnabled = false;
 
-    bool found = false;
-
     bool firstUpdateFree = true;
+
+    float lastScream = 0;
 
     public void SetTexture(RenderTexture renderTexture) {
         cam.targetTexture = renderTexture;
@@ -51,8 +51,8 @@ public class EnemyController : MonoBehaviour {
             runSfx.mute = false;
         }
 
-        if (!found) {
-            found = true;
+        if (Time.time - lastScream >= 10f) {
+            lastScream = Time.time;
             audioManager.Play("MonsterScream");
         }
 
@@ -97,9 +97,9 @@ public class EnemyController : MonoBehaviour {
                 SetTarget(player.transform.position);
             }
 
-            if (agent.remainingDistance < 0.1) {
-                found = false;
+            float dist = agent.remainingDistance;
 
+            if (dist != Mathf.Infinity && agent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && agent.remainingDistance == 0) {
                 agent.speed = 3.5f;
                 sprint = false;
 
