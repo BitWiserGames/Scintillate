@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5236025452093844198}
   - component: {fileID: 6336979476854568324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SwitchBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
