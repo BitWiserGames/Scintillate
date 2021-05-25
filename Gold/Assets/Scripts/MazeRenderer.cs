@@ -28,11 +28,17 @@ public class MazeRenderer : MonoBehaviour {
     private Transform gatePrefab = null;
 
     [SerializeField]
+    private Transform switchPrefab = null;
+
+    [SerializeField]
+    private LayerMask switchLayer;
+
+    [SerializeField]
     UnityEngine.AI.NavMeshSurface surface = null;
 
     // Start is called before the first frame update
     void Start() {
-        WallState[,] maze = MazeGenerator.Generate(width, height);
+        WallState[,] maze = MazeGenerator.Generate(width, height, switchLayer);
 
         SpawnPlayer();
         Draw(maze);
@@ -96,6 +102,33 @@ public class MazeRenderer : MonoBehaviour {
                             gate.position = position + new Vector3(size * ((nX - x) / 2f), 0, size * ((nY - y) / 2f));
                             gate.localScale = new Vector3(gate.localScale.x * size, gate.localScale.y * size, gate.localScale.z * size);
                             gate.eulerAngles = new Vector3(0, (Mathf.Abs(nX - x) > Mathf.Abs(nY - y) ? 90 : 0), 0);
+                        }
+                    }
+
+                    if (cell.HasFlag(WallState.POWER_SWITCH)) {
+                        Transform powerSwitch = Instantiate(switchPrefab, transform);
+
+                        if (cell.HasFlag(WallState.UP)) {
+                            powerSwitch.position = position + new Vector3(-0.05f, 2, size / 2f);
+                            powerSwitch.position += Vector3.forward * -0.5f;
+                            powerSwitch.eulerAngles = new Vector3(0, 180, 0);
+                        }
+                        else if (cell.HasFlag(WallState.LEFT)) {
+                            powerSwitch.position = position + new Vector3(-size / 2f, 2, -0.05f);
+                            powerSwitch.position += Vector3.right * 0.5f;
+                            powerSwitch.eulerAngles = new Vector3(0, 90, 0);
+                        }
+                        else if (cell.HasFlag(WallState.DOWN)) {
+                            powerSwitch.position = position + new Vector3(-0.05f, 2, -size / 2f);
+                            powerSwitch.position += Vector3.forward * 0.5f;
+                        }
+                        else if (cell.HasFlag(WallState.RIGHT)) {
+                            powerSwitch.position = position + new Vector3(size / 2f, 2, -0.05f);
+                            powerSwitch.position += Vector3.right * -0.5f;
+                            powerSwitch.eulerAngles = new Vector3(0, 270, 0);
+                        }
+                        else {
+                            Debug.Log("Failed positioning");
                         }
                     }
                 }
