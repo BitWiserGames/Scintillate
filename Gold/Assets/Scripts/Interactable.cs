@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour {
     private Quaternion switchRotation;
     private Quaternion doorLeftRot;
     private Quaternion doorRightRot;
+    bool set = false;
 
     public void Update() {
         if (activated) {
@@ -30,8 +31,7 @@ public class Interactable : MonoBehaviour {
 
                     interactableCenter.transform.localRotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(0, 0, 0)), Quaternion.Euler(new Vector3(90, 0, 0)), (Time.time - startTime) * speed);
                 }
-            }
-            else {
+            } else {
                 interactableLeft.transform.localRotation = Quaternion.Lerp(doorLeftRot, Quaternion.Euler(new Vector3(0, 90, 0)), (Time.time - startTime) * speed);
                 interactableRight.transform.localRotation = Quaternion.Lerp(doorRightRot, Quaternion.Euler(new Vector3(0, -90, 0)), (Time.time - startTime) * speed);
             }
@@ -39,27 +39,33 @@ public class Interactable : MonoBehaviour {
     }
 
     public void Interact() {
-        if (!interacted) {
-            if (!activated) {
-                if (isSwitch) {
-                    WorldState.ActivateSwitch();
-                    switchRotation = interactableCenter.transform.localRotation;
-                    FindObjectOfType<AudioManager>().Play("Switch");
-                    activated = true;
-                    startTime = Time.time;
-                } else {
-                    PlayerController pc = FindObjectOfType<PlayerController>();
-                    if(pc.getCoin() >= doorCost) {
-                        pc.removeCoin(doorCost);
-                        doorLeftRot = interactableLeft.transform.localRotation;
-                        doorRightRot = interactableRight.transform.localRotation;
-                        FindObjectOfType<AudioManager>().Play("Gate");
+        if (set)
+            if (!interacted)
+                if (!activated)
+                    if (isSwitch) {
+                        FindObjectOfType<WorldState>().ActivateSwitch();
+                        switchRotation = interactableCenter.transform.localRotation;
+                        FindObjectOfType<AudioManager>().Play("Switch");
                         activated = true;
                         startTime = Time.time;
+                    } else {
+                        PlayerController pc = FindObjectOfType<PlayerController>();
+                        if (pc.getCoin() >= doorCost) {
+                            pc.removeCoin(doorCost);
+                            doorLeftRot = interactableLeft.transform.localRotation;
+                            doorRightRot = interactableRight.transform.localRotation;
+                            FindObjectOfType<AudioManager>().Play("Gate");
+                            activated = true;
+                            startTime = Time.time;
+                        }
                     }
-                }
-            }
-        }
+    }
+
+    public void SetSwitch() {
+        set = true;
+        interactableCenter.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+        interactableLeft.SetActive(true);
+        interactableRight.SetActive(false);
     }
 
     public void OpenGate() {

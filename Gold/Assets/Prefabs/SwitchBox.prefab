@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4457740892757809200
 Transform:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3692197408505738660
 Transform:
   m_ObjectHideFlags: 0
@@ -134,12 +134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3261f7cf94c157340bb6281ebdf704fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
   isSwitch: 1
   interactableLeft: {fileID: 6265668634282938807}
   interactableCenter: {fileID: 1766512912082666197}
   interactableRight: {fileID: 887184858373724388}
   activated: 0
+  interacted: 0
   speed: 3
 --- !u!65 &212265936838985362
 BoxCollider:
@@ -183,7 +183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e33951a954e6064688fb3e627ed7628, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e33951a954e6064688fb3e627ed7628, type: 3}
       propertyPath: m_LocalRotation.y
@@ -195,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e33951a954e6064688fb3e627ed7628, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e33951a954e6064688fb3e627ed7628, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
