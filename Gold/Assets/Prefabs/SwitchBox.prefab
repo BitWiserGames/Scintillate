@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5236025452093844198}
   - component: {fileID: 6336979476854568324}
+  - component: {fileID: 212265936838985362}
   m_Layer: 9
   m_Name: SwitchBox
   m_TagString: Untagged
@@ -135,6 +136,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   isSwitch: 1
+  interactableLeft: {fileID: 6265668634282938807}
+  interactableRight: {fileID: 887184858373724388}
+--- !u!65 &212265936838985362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289542647806645918}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 2, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1459874311939112836
 PrefabInstance:
   m_ObjectHideFlags: 0
