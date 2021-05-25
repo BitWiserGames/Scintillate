@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
     WorldState worldState = null;
 
     bool coinJiggleEnabled = false;
+    bool runSoundEnabled = false;
+    bool walkSoundEnabled = false;
 
     public void KillPlayer() {
         // Disable enemies
@@ -44,9 +46,18 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Disable player
-        this.enabled = false;
-        this.animator.SetFloat("Speed", 0);
-        this.audioManager.Stop("CoinBagShake");
+        enabled = false;
+        animator.SetFloat("Speed", 0);
+        audioManager.Stop("CoinBagShake");
+        audioManager.Stop("PlayerWalk");
+        audioManager.Stop("PlayerRun");
+
+        GameObject[] enemyNoises = GameObject.FindGameObjectsWithTag("EnemyAudio");
+
+        foreach (GameObject gameObject in enemyNoises) {
+            gameObject.SetActive(false);
+        }
+
         mouseLookScript.enabled = false;
 
         // Ragdoll
@@ -101,9 +112,19 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButton("Sprint") && z > 0) { // Moving forward, not backwards
                 move *= 2;
 
+                if (walkSoundEnabled) {
+                    walkSoundEnabled = false;
+                    audioManager.Stop("PlayerWalk");
+                }
+
                 if (!coinJiggleEnabled && coins >= 2) {
                     coinJiggleEnabled = true;
                     audioManager.Play("CoinBagShake");
+                }
+
+                if (!runSoundEnabled) {
+                    runSoundEnabled = true;
+                    audioManager.Play("PlayerRun");
                 }
 
                 animator.SetBool("Sprint", true);
@@ -112,6 +133,19 @@ public class PlayerController : MonoBehaviour {
                 if (coinJiggleEnabled) {
                     coinJiggleEnabled = false;
                     audioManager.Stop("CoinBagShake");
+                }
+
+                if (runSoundEnabled) {
+                    runSoundEnabled = false;
+                    audioManager.Stop("PlayerRun");
+                }
+
+                if (!walkSoundEnabled && move.magnitude != 0) {
+                    walkSoundEnabled = true;
+                    audioManager.Play("PlayerWalk");
+                } else if (walkSoundEnabled && move.magnitude == 0) {
+                    walkSoundEnabled = false;
+                    audioManager.Stop("PlayerWalk");
                 }
 
                 animator.SetBool("Sprint", false);
@@ -147,6 +181,12 @@ public class PlayerController : MonoBehaviour {
         }
         else {
             animator.SetFloat("Speed", 0);
+            walkSoundEnabled = false;
+            audioManager.Stop("PlayerWalk");
+            runSoundEnabled = false;
+            audioManager.Stop("PlayerRun");
+            coinJiggleEnabled = false;
+            audioManager.Stop("CoinBagShake");
         }
     }
 

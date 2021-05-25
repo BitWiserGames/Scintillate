@@ -12,6 +12,11 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     Camera cam;
 
+    public AudioSource walkSfx;
+    public AudioSource runSfx;
+
+    AudioManager audioManager = null;
+
     RenderTexture lightCheckTexture = null;
 
     float lightLevel;
@@ -19,6 +24,11 @@ public class EnemyController : MonoBehaviour {
     public static PlayerController player;
 
     bool sprint = false;
+    
+    bool runSoundEnabled = false;
+    bool walkSoundEnabled = false;
+
+    bool found = false;
 
     public void SetTexture(RenderTexture renderTexture) {
         cam.targetTexture = renderTexture;
@@ -29,10 +39,27 @@ public class EnemyController : MonoBehaviour {
         agent.SetDestination(position);
         sprint = true;
 
+        if (!runSoundEnabled) {
+            if (walkSoundEnabled) {
+                walkSoundEnabled = false;
+                walkSfx.mute = true;
+            }
+
+            runSoundEnabled = true;
+            runSfx.mute = false;
+        }
+
+        if (!found) {
+            found = true;
+            audioManager.Play("MonsterScream");
+        }
+
         agent.speed = 7f;
     }
 
     private void Start() {
+        audioManager = FindObjectOfType<AudioManager>();
+
         agent.speed = 3.5f;
         player = FindObjectOfType<PlayerController>();
     }
@@ -66,6 +93,8 @@ public class EnemyController : MonoBehaviour {
             }
 
             if (agent.remainingDistance < 0.1) {
+                found = false;
+
                 agent.speed = 3.5f;
                 sprint = false;
 
@@ -76,6 +105,16 @@ public class EnemyController : MonoBehaviour {
                 z = Mathf.Min(Mathf.Max(z, -0.5f * MazeRenderer.height * MazeRenderer.size), 0.5f * MazeRenderer.height * MazeRenderer.size);
 
                 agent.SetDestination(new Vector3(x, 0, z));
+
+                if (!walkSoundEnabled) {
+                    if (runSoundEnabled) {
+                        runSoundEnabled = false;
+                        runSfx.mute = true;
+                    }
+
+                    walkSoundEnabled = true;
+                    walkSfx.mute = false;
+                }
             }
 
             if (Vector3.Distance(transform.position, player.transform.position) < 2) {
