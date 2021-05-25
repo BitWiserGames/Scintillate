@@ -58,6 +58,13 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: PlayerDeathSong
+    clip: {fileID: 8300000, guid: 7e4d9d4aa6216674fb315b3447fbc744, type: 3}
+    group: {fileID: 2905102364251620307, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: CoinPickup
     clip: {fileID: 8300000, guid: 05b8cbc5cbddcef4cbe5f57b04ca3293, type: 3}
     group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
@@ -100,8 +107,8 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: PlayerDeath
-    clip: {fileID: 8300000, guid: 2f22d48dc9c45984eba9d8137b704a6d, type: 3}
+  - name: PlayerDeathSfx
+    clip: {fileID: 8300000, guid: 6fb28e0e5d1b50b4ab430cf7dede0638, type: 3}
     group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
     volume: 1
     pitch: 1
