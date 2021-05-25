@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MenuController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class MenuController : MonoBehaviour
     public Slider sfx;
     public Slider music;
     public Slider sensitivity;
+    public Slider loadingBar;
 
 
     private void Start() {
@@ -47,7 +49,18 @@ public class MenuController : MonoBehaviour
     }
 
     public void ChangeScene(int index) {
-        SceneManager.LoadScene(index);
+        StartCoroutine(LoadAsynchronously(index));
+    }
+
+    IEnumerator LoadAsynchronously(int index) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(index);
+
+        while(!operation.isDone) {
+            float prog = Mathf.Clamp01(operation.progress / .9f);
+            loadingBar.value = prog;
+
+            yield return null;
+        }
     }
 
     public static void CloseGame() {

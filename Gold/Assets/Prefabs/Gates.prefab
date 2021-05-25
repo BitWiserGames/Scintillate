@@ -179,6 +179,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1859290506533473872}
+  - component: {fileID: 8679965179569296668}
+  - component: {fileID: 3097098575448316281}
   m_Layer: 0
   m_Name: Gates
   m_TagString: Untagged
@@ -202,6 +204,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8679965179569296668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710265971430833288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3261f7cf94c157340bb6281ebdf704fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
+  isSwitch: 0
+  interactableLeft: {fileID: 236850147925880127}
+  interactableCenter: {fileID: 0}
+  interactableRight: {fileID: 1195795317233096166}
+  activated: 0
+  interacted: 0
+  speed: 0.25
+--- !u!65 &3097098575448316281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710265971430833288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.81973624, z: 0.03704288}
+  m_Center: {x: 0, y: 0.39930272, z: 0}
 --- !u!1001 &6064491255845236900
 PrefabInstance:
   m_ObjectHideFlags: 0
