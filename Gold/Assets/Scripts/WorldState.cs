@@ -13,6 +13,7 @@ public class WorldState : MonoBehaviour {
     RenderTexture[] renderTextures;
 
     public GameObject pauseMenu;
+    public GameObject costText;
 
     Camera cam;
 
@@ -26,6 +27,12 @@ public class WorldState : MonoBehaviour {
 
     private static int switchesActivated = 0;
     private static int switchesNeeded = 3;
+
+    public void SetLookingAtDoor(bool state) {
+
+        costText.SetActive(state);
+
+    }
 
     public static void ActivateSwitch() {
         ++switchesActivated;
@@ -45,8 +52,7 @@ public class WorldState : MonoBehaviour {
         if (paused) {
             pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
-        }
-        else {
+        } else {
             Cursor.lockState = CursorLockMode.Locked;
         }
     }

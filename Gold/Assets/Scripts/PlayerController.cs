@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
 
     public MouseLook mouseLookScript = null;
 
+    private float interactDistance = 3;
+
     CoinDisplay coinDisplay;
 
     AudioManager audioManager = null;
@@ -82,8 +84,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Physics.Raycast(transform.position, transform.forward * -3, 1)) {
                 coin.position = transform.position + (transform.forward * 3) + (transform.up * 0.8f);
-            }
-            else {
+            } else {
                 coin.position = transform.position + (transform.forward * -3) + (transform.up * 0.8f);
             }
 
@@ -116,6 +117,9 @@ public class PlayerController : MonoBehaviour {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
+            Ray ray = mouseLookScript.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
             Vector3 move = ((transform.right * x + transform.forward * z).normalized / 2) * speed;
 
             if (Input.GetButton("Sprint") && z > 0) { // Moving forward, not backwards
@@ -137,8 +141,7 @@ public class PlayerController : MonoBehaviour {
                 }
 
                 animator.SetBool("Sprint", true);
-            }
-            else {
+            } else {
                 if (coinJiggleEnabled) {
                     coinJiggleEnabled = false;
                     audioManager.Stop("CoinBagShake");
@@ -171,6 +174,14 @@ public class PlayerController : MonoBehaviour {
                 move *= 0.4f;
             }
 
+            if (Physics.Raycast(ray, out hit, interactDistance)) {
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                if (interactable != null)
+                    if (!interactable.isSwitch && !interactable.activated)
+                        worldState.SetLookingAtDoor(true);
+
+            } else
+                worldState.SetLookingAtDoor(false);
             animator.SetFloat("Speed", move.magnitude);
 
             controller.Move(move * Time.deltaTime);
@@ -183,12 +194,9 @@ public class PlayerController : MonoBehaviour {
                 flashlightLight.enabled = !flashlightLight.enabled;
                 audioManager.Play("Flashlight");
             }
-            
-            if (Input.GetButtonDown("Interact")) {
-                Ray ray = mouseLookScript.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 100)) {
+            if (Input.GetButtonDown("Interact")) {
+                if (Physics.Raycast(ray, out hit, interactDistance)) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable != null) {
                         interactable.Interact();
@@ -199,8 +207,7 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Cancel")) {
                 worldState.PauseGame();
             }
-        }
-        else {
+        } else {
             animator.SetFloat("Speed", 0);
             walkSoundEnabled = false;
             audioManager.Stop("PlayerWalk");
