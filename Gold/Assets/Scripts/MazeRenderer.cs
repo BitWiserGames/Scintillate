@@ -25,6 +25,9 @@ public class MazeRenderer : MonoBehaviour {
     private Transform entryPrefab = null;
 
     [SerializeField]
+    private Transform gatePrefab = null;
+
+    [SerializeField]
     UnityEngine.AI.NavMeshSurface surface = null;
 
     // Start is called before the first frame update
@@ -48,7 +51,7 @@ public class MazeRenderer : MonoBehaviour {
                 if (x != 0 || y != 0) {
                     if (cell.HasFlag(WallState.COIN)) {
                         Transform coin = Instantiate(coinPrefab, transform);
-                        coin.position = position + new Vector3(0, 2, 0);
+                        coin.position = position + new Vector3(0, 1.7f, 0);
                     }
 
                     if (cell.HasFlag(WallState.UP)) {
@@ -58,10 +61,42 @@ public class MazeRenderer : MonoBehaviour {
                     }
 
                     if (cell.HasFlag(WallState.LEFT)) {
-                        Transform leftWall = Instantiate(wallPrefab, transform) as Transform;
+                        Transform leftWall = Instantiate(wallPrefab, transform);
                         leftWall.position = position + new Vector3(-size / 2f, 0, 0);
                         leftWall.localScale = new Vector3(leftWall.localScale.x * size, leftWall.localScale.y * size, leftWall.localScale.z * size);
                         leftWall.eulerAngles = new Vector3(0, 90, 0);
+                    }
+
+                    int nX = x;
+                    int nY = y;
+
+                    bool found = false;
+
+                    if (cell.HasFlag(WallState.GATE)) {
+                        for (int i = x - 1; i <= x + 1; ++i) {
+                            for (int j = y - 1; j <= y + 1; ++j) {
+                                if (i >= 0 && i < width && j >= 0 && j < height) {
+                                    if (i == x && j == y) {
+                                        break;
+                                    }
+                                    if (maze[i, j].HasFlag(WallState.GATE_PAIR)) {
+                                        nX = i;
+                                        nY = j;
+
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (found)
+                                break;
+                        }
+                        if (nX != x || nY != y) {
+                            Transform gate = Instantiate(gatePrefab, transform);
+                            gate.position = position + new Vector3(size * ((nX - x) / 2f), 0, size * ((nY - y) / 2f));
+                            gate.localScale = new Vector3(gate.localScale.x * size, gate.localScale.y * size, gate.localScale.z * size);
+                            gate.eulerAngles = new Vector3(0, (Mathf.Abs(nX - x) > Mathf.Abs(nY - y) ? 90 : 0), 0);
+                        }
                     }
                 }
                 else {
@@ -71,24 +106,24 @@ public class MazeRenderer : MonoBehaviour {
                 }
 
                 if (x == width - 1) {
-                        if (cell.HasFlag(WallState.RIGHT)) {
-                            Transform rightWall = Instantiate(wallPrefab, transform) as Transform;
-                            rightWall.position = position + new Vector3(size / 2f, 0, 0);
-                            rightWall.localScale = new Vector3(rightWall.localScale.x * size, rightWall.localScale.y * size, rightWall.localScale.z * size);
-                            rightWall.eulerAngles = new Vector3(0, 90, 0);
-                        }
+                    if (cell.HasFlag(WallState.RIGHT)) {
+                        Transform rightWall = Instantiate(wallPrefab, transform);
+                        rightWall.position = position + new Vector3(size / 2f, 0, 0);
+                        rightWall.localScale = new Vector3(rightWall.localScale.x * size, rightWall.localScale.y * size, rightWall.localScale.z * size);
+                        rightWall.eulerAngles = new Vector3(0, 90, 0);
                     }
+                }
 
-                    if (y == 0) {
-                        if (cell.HasFlag(WallState.DOWN)) {
-                            Transform bottomWall = Instantiate(wallPrefab, transform) as Transform;
-                            bottomWall.position = position + new Vector3(0, 0, -size / 2f);
-                            bottomWall.localScale = new Vector3(bottomWall.localScale.x * size, bottomWall.localScale.y * size, bottomWall.localScale.z * size);
-                        }
+                if (y == 0) {
+                    if (cell.HasFlag(WallState.DOWN)) {
+                        Transform bottomWall = Instantiate(wallPrefab, transform);
+                        bottomWall.position = position + new Vector3(0, 0, -size / 2f);
+                        bottomWall.localScale = new Vector3(bottomWall.localScale.x * size, bottomWall.localScale.y * size, bottomWall.localScale.z * size);
                     }
+                }
             }
         }
-        
+
 
         surface.BuildNavMesh();
     }

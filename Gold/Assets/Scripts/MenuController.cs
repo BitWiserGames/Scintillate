@@ -19,6 +19,8 @@ public class MenuController : MonoBehaviour
 
 
     private void Start() {
+        Cursor.lockState = CursorLockMode.Confined;
+
         sensitivity.value = MouseLook.mouseMult;
         master.value = Mathf.Pow(10f, masterVal / 20f);
         sfx.value = Mathf.Pow(10f, sfxVal / 20f);

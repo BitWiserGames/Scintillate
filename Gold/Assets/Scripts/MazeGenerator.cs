@@ -5,15 +5,20 @@ using UnityEngine;
 
 [Flags]
 public enum WallState {
-    LEFT = 1,      // 0000 0000 0001
-    RIGHT = 2,     // 0000 0000 0010
-    UP = 4,        // 0000 0000 0100
-    DOWN = 8,      // 0000 0000 1000
+    // Sides
+    LEFT = 1,           // 0000 0000 0001
+    RIGHT = 2,          // 0000 0000 0010
+    UP = 4,             // 0000 0000 0100
+    DOWN = 8,           // 0000 0000 1000
 
-    VISITED = 16,  // 0000 0001 0000
+    // States
+    VISITED = 16,       // 0000 0001 0000
 
-    COIN = 256,    // 0001 0000 0000
-    GATE = 512     // 0010 0000 0000
+    // Features
+    COIN = 256,         // 0001 0000 0000
+    GATE = 512,         // 0010 0000 0000
+    GATE_PAIR = 1024,   // 0010 0000 0000
+    POWER_SWITCH = 2048 // 1000 0000 0000
 }
 
 public struct Position {
@@ -38,6 +43,8 @@ public static class MazeGenerator {
     }
 
     private static WallState[,] RecursiveBacktracker(WallState[,] maze, uint width, uint height) {
+        int currentCoins = 0;
+
         System.Random rng = new System.Random();
 
         Stack<Position> positionStack = new Stack<Position>();
@@ -62,22 +69,31 @@ public static class MazeGenerator {
                 maze[current.X, current.Y] &= ~randomNeighbor.SharedWall;
                 maze[nPosition.X, nPosition.Y] &= ~GetOppositeWall(randomNeighbor.SharedWall);
 
-                if (rng.Next(0, 100) <= 3) {
+                if (rng.Next(0, 100) <= 5) {
                     bool valid = true;
 
                     for (int i = current.X - 1; i < current.X + 1; ++i) {
                         for (int j = current.Y - 1; j < current.Y + 1; ++j) {
                             if (i >= 0 && i < width && j >= 0 && j < height)
-                            if (maze[i, j].HasFlag(WallState.COIN)) {
-                                valid = false;
-                                break;
-                            }
+                                if (maze[i, j].HasFlag(WallState.COIN)) {
+                                    valid = false;
+                                    break;
+                                }
                         }
                         if (!valid)
                             break;
                     }
-                    if (valid)
+                    if (valid) {
                         maze[current.X, current.Y] |= WallState.COIN;
+                        ++currentCoins;
+
+                        if (currentCoins == 5) {
+                            currentCoins = 0;
+
+                            maze[current.X, current.Y] |= WallState.GATE;
+                            maze[nPosition.X, nPosition.Y] |= WallState.GATE_PAIR;
+                        }
+                    }
                 }
 
                 maze[nPosition.X, nPosition.Y] |= WallState.VISITED;
