@@ -69,7 +69,7 @@ public static class MazeGenerator {
                 maze[current.X, current.Y] &= ~randomNeighbor.SharedWall;
                 maze[nPosition.X, nPosition.Y] &= ~GetOppositeWall(randomNeighbor.SharedWall);
 
-                if (rng.Next(0, 100) <= 5) {
+                if (rng.Next(0, 100) <= 7) {
                     bool valid = true;
 
                     for (int i = current.X - 1; i < current.X + 1; ++i) {

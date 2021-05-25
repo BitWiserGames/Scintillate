@@ -62,7 +62,12 @@ public class PlayerController : MonoBehaviour {
 
         mouseLookScript.enabled = false;
 
-        // Ragdoll
+        // Death sounds
+        audioManager.Stop("ThemeDoom");
+
+        audioManager.Play("MonsterScream");
+        audioManager.Play("PlayerDeathSfx");
+        audioManager.Play("PlayerDeathSong");
 
         worldState.LoseGame();
         // Show score
