@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 575
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -2561,6 +2561,7 @@ MonoBehaviour:
   sfx: {fileID: 1544546270}
   music: {fileID: 1499833956}
   sensitivity: {fileID: 1702220680}
+  loadingBar: {fileID: 0}
 --- !u!1 &1282642105
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,6 +3514,10 @@ MonoBehaviour:
   coinPrefab: {fileID: 3713231256190285053, guid: 47f605f3475b18d418a7d98be30f2e7c, type: 3}
   entryPrefab: {fileID: 1645926974266857357, guid: 8109768dbf233ca47ae74c8253d0e9b2, type: 3}
   gatePrefab: {fileID: 1859290506533473872, guid: c9796904fdc389247893440b3362a575, type: 3}
+  switchPrefab: {fileID: 5236025452093844198, guid: c74c1c8cd993f854faf0aee713ab4578, type: 3}
+  switchLayer:
+    serializedVersion: 2
+    m_Bits: 512
   surface: {fileID: 685145929}
 --- !u!4 &1752157749
 Transform:
