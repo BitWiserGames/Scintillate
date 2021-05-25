@@ -93,6 +93,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void removeCoin(int amount) {
+        coins -= amount;
+        coinDisplay.SetCoinCount(coins);
+    }
+
+    public int getCoin() {
+        return coins;
+    }
+
     private void Start() {
         coinDisplay = FindObjectOfType<CoinDisplay>();
         worldState = FindObjectOfType<WorldState>();
@@ -173,6 +182,18 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Flashlight")) {
                 flashlightLight.enabled = !flashlightLight.enabled;
                 audioManager.Play("Flashlight");
+            }
+            
+            if (Input.GetButtonDown("Interact")) {
+                Ray ray = mouseLookScript.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100)) {
+                    Interactable interactable = hit.collider.GetComponent<Interactable>();
+                    if (interactable != null) {
+                        interactable.Interact();
+                    }
+                }
             }
 
             if (Input.GetButtonDown("Cancel")) {
