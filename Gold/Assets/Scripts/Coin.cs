@@ -15,6 +15,11 @@ public class Coin : MonoBehaviour {
         am = FindObjectOfType<AudioManager>();
     }
 
+    private void Update() {
+        transform.position = transform.position + new Vector3(0, (Mathf.Sin(Time.time) * 0.5f) * Time.deltaTime, 0);
+        transform.Rotate(Vector3.up, Space.Self);
+    }
+
     void Pickup(Collider player) {
         am.Play("CoinPickup");
 
