@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 273384455575327256}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607657717131533626}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4416681323024148634}
   - component: {fileID: 8152309279903493219}
   - component: {fileID: 3509124569276728320}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: gate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 1859290506533473872}
   - component: {fileID: 8679965179569296668}
   - component: {fileID: 3097098575448316281}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Gates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3261f7cf94c157340bb6281ebdf704fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
   isSwitch: 0
   interactableLeft: {fileID: 236850147925880127}
   interactableCenter: {fileID: 0}
@@ -303,6 +302,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 182af39744b557642bb7d175a87cb056, type: 3}
       propertyPath: m_Name
       value: gate (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 182af39744b557642bb7d175a87cb056, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 182af39744b557642bb7d175a87cb056, type: 3}
