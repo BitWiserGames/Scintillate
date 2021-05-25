@@ -24,6 +24,21 @@ public class WorldState : MonoBehaviour {
 
     public static Transform[] enemies = new Transform[4];
 
+    private int switchesActivated = 0;
+    private int switchesNeeded = 3;
+
+    public void ActivateSwitch() {
+        ++switchesActivated;
+
+        if (switchesActivated >= switchesNeeded) {
+            WinGame();
+        }
+    }
+
+    public void WinGame() {
+
+    }
+
     public void PauseGame() {
         paused = !paused;
 
