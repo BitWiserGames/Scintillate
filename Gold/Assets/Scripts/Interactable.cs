@@ -19,16 +19,16 @@ public class Interactable : MonoBehaviour {
         if (activated) {
             interacted = true;
             if (isSwitch) {
-                if (interactableCenter.transform.rotation.x < 0) {
-                    interactableCenter.transform.rotation = Quaternion.Lerp(switchRotation, Quaternion.Euler(new Vector3(0, 0, 0)), (Time.time - startTime) * speed);
-                    if (interactableCenter.transform.rotation.x >= 0 && interactableCenter.transform.rotation.x < 90)
+                if (interactableCenter.transform.localRotation.x < 0) {
+                    interactableCenter.transform.localRotation = Quaternion.Lerp(switchRotation, Quaternion.Euler(new Vector3(0, 0, 0)), (Time.time - startTime) * speed);
+                    if (interactableCenter.transform.localRotation.x >= 0 && interactableCenter.transform.localRotation.x < 90)
                         startTime = Time.time;
                 }
-                if (interactableCenter.transform.rotation.x >= 0 && interactableCenter.transform.rotation.x < 90) {
+                if (interactableCenter.transform.localRotation.x >= 0 && interactableCenter.transform.localRotation.x < 90) {
                     interactableLeft.SetActive(false);
                     interactableRight.SetActive(true);
 
-                    interactableCenter.transform.rotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(0, 0, 0)), Quaternion.Euler(new Vector3(90, 0, 0)), (Time.time - startTime) * speed);
+                    interactableCenter.transform.localRotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(0, 0, 0)), Quaternion.Euler(new Vector3(90, 0, 0)), (Time.time - startTime) * speed);
                 }
             }
             else {
@@ -42,7 +42,8 @@ public class Interactable : MonoBehaviour {
         if (!interacted) {
             if (!activated) {
                 if (isSwitch) {
-                    switchRotation = interactableCenter.transform.rotation;
+                    WorldState.ActivateSwitch();
+                    switchRotation = interactableCenter.transform.localRotation;
                     FindObjectOfType<AudioManager>().Play("Switch");
                     activated = true;
                     startTime = Time.time;
