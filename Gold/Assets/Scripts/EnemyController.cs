@@ -30,6 +30,8 @@ public class EnemyController : MonoBehaviour {
 
     bool found = false;
 
+    bool firstUpdateFree = true;
+
     public void SetTexture(RenderTexture renderTexture) {
         cam.targetTexture = renderTexture;
         this.lightCheckTexture = renderTexture;
@@ -59,14 +61,17 @@ public class EnemyController : MonoBehaviour {
 
     private void Start() {
         audioManager = FindObjectOfType<AudioManager>();
-
-        agent.speed = 3.5f;
         player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
     void Update() {
         if (!WorldState.IsPaused()) {
+            if (firstUpdateFree) {
+                firstUpdateFree = false;
+
+                agent.speed = 3.5f;
+            }
             RenderTexture tmpTexture = RenderTexture.GetTemporary(lightCheckTexture.width, lightCheckTexture.height, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
             Graphics.Blit(lightCheckTexture, tmpTexture);
 
@@ -126,6 +131,13 @@ public class EnemyController : MonoBehaviour {
         else {
             anim.SetFloat("Speed", 0);
             agent.speed = 0;
+
+            runSoundEnabled = false;
+            runSfx.mute = true;
+            walkSoundEnabled = false;
+            walkSfx.mute = true;
+
+            firstUpdateFree = true;
         }
     }
 }
