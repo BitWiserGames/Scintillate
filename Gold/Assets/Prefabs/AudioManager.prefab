@@ -100,6 +100,13 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 2f22d48dc9c45984eba9d8137b704a6d, type: 3}
+    group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Gate
     clip: {fileID: 8300000, guid: a4670c6c3206b71429081b33fdce420a, type: 3}
     group: {fileID: -9579241348099536, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
