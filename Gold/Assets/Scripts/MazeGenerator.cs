@@ -42,7 +42,7 @@ public static class MazeGenerator {
         }
     }
 
-    private static WallState[,] RecursiveBacktracker(WallState[,] maze, uint width, uint height) {
+    private static WallState[,] RecursiveBacktracker(WallState[,] maze, uint width, uint height, LayerMask switchLayer) {
         int currentCoins = 0;
 
         System.Random rng = new System.Random();
@@ -102,6 +102,51 @@ public static class MazeGenerator {
             }
         }
 
+        Vector3[] switchLocations = new Vector3[3];
+        float distanceRequired = (Mathf.Min(MazeRenderer.width, MazeRenderer.height)) / 2f;
+
+        Vector3 testLocation = new Vector3(1, 1, 1);
+
+        // Generate switches
+        for (int i = 0; i < 3; ++i) {
+            bool valid = false;
+            int attempts = 0;
+
+            int x = 0;
+            int y = 0;
+
+            while (!valid) {
+                x = rng.Next(0, (int)width);
+                y = rng.Next(0, (int)height);
+
+                if (i == 0) {
+                    break;
+                }
+
+                bool passedDistanceCheck = true;                
+
+                for (int j = 0; j < i; ++j) {
+                    float distance = Vector3.Distance(new Vector3(x, 0, y), switchLocations[j]);
+                    if (distance < distanceRequired) {
+                        passedDistanceCheck = false;
+                        break;
+                    }
+                }
+
+                if (passedDistanceCheck)
+                    break;
+
+                ++attempts;
+
+                if (attempts >= 20) {
+                    Debug.Log("Failed to find placement");
+                    valid = true;
+                }
+            }
+            maze[x, y] |= WallState.POWER_SWITCH;
+            switchLocations[i] = new Vector3(x, 0, y);
+        }
+
         return maze;
     }
 
@@ -159,7 +204,7 @@ public static class MazeGenerator {
         return list;
     }
 
-    public static WallState[,] Generate(uint width, uint height) {
+    public static WallState[,] Generate(uint width, uint height, LayerMask switchLayer) {
         WallState[,] maze = new WallState[width, height];
 
         WallState init = WallState.RIGHT | WallState.LEFT | WallState.UP | WallState.DOWN;
@@ -170,7 +215,6 @@ public static class MazeGenerator {
             }
         }
 
-        return RecursiveBacktracker(maze, width, height);
+        return RecursiveBacktracker(maze, width, height, switchLayer);
     }
-
 }
