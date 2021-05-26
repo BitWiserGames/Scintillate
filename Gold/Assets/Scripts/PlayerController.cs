@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour {
                 move *= 0.4f;
             }
 
+            
             if (Physics.Raycast(ray, out hit, interactDistance)) {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if (interactable != null)
@@ -187,8 +188,9 @@ public class PlayerController : MonoBehaviour {
 
             } else
                 worldState.SetLookingAtDoor(false);
-            animator.SetFloat("Speed", move.magnitude);
 
+            animator.SetFloat("Speed", move.magnitude);
+            
             controller.Move(move * Time.deltaTime);
 
             if (Input.GetButtonDown("Drop")) {
