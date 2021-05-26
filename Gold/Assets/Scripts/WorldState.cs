@@ -12,12 +12,17 @@ public class WorldState : MonoBehaviour {
     [SerializeField]
     RenderTexture[] renderTextures;
 
+    [SerializeField]
+    AudioManager audioManager;
+
     public GameObject pauseMenu;
     public GameObject costText;
     public GameObject loseScreen;
     public GameObject winScreen;
 
     Camera cam;
+
+    Color startSkyBox;
 
     bool doomModeStarted = false;
 
@@ -46,7 +51,7 @@ public class WorldState : MonoBehaviour {
 
     IEnumerator WinGameCo() {
 
-        cam.backgroundColor = new Color(49, 77, 121);
+        cam.backgroundColor = startSkyBox;
         sun.enabled = true;
 
         yield return new WaitForSeconds(2);
@@ -57,6 +62,12 @@ public class WorldState : MonoBehaviour {
     public void WinGame() {
         PauseGame();
         winScreen.SetActive(true);
+        audioManager.Play("WinSong");
+
+        audioManager.Stop("CoinBagShake");
+        audioManager.Stop("PlayerWalk");
+        audioManager.Stop("PlayerRun");
+        audioManager.Stop("ThemeDoom");
     }
 
     public void LoseGame() {
@@ -85,6 +96,8 @@ public class WorldState : MonoBehaviour {
 
     public void startDoomMode() {
         cam = FindObjectOfType<Camera>();
+
+        startSkyBox = cam.backgroundColor;
 
         Interactable[] interactables = FindObjectsOfType<Interactable>();
 
