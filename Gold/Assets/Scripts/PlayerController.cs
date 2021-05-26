@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     LayerMask enemyLayer;
 
+    [SerializeField]
+    LayerMask wallLayer;
+
     public MouseLook mouseLookScript = null;
 
     private float interactDistance = 3;
@@ -87,7 +90,7 @@ public class PlayerController : MonoBehaviour {
             // Physically drop coin
             Transform coin = Instantiate(coinPrefab);
 
-            if (Physics.Raycast(transform.position, transform.forward * -3, 1)) {
+            if (Physics.Raycast(transform.position, transform.forward * -3, 3, wallLayer)) {
                 coin.position = transform.position + (transform.forward * 3) + (transform.up * 0.8f);
             } else {
                 coin.position = transform.position + (transform.forward * -3) + (transform.up * 0.8f);
