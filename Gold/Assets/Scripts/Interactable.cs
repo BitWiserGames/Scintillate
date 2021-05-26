@@ -39,26 +39,28 @@ public class Interactable : MonoBehaviour {
     }
 
     public void Interact() {
-        if (set)
-            if (!interacted)
-                if (!activated)
-                    if (isSwitch) {
+
+        if (!interacted)
+            if (!activated)
+                if (isSwitch) {
+                    if (set) {
                         FindObjectOfType<WorldState>().ActivateSwitch();
                         switchRotation = interactableCenter.transform.localRotation;
                         FindObjectOfType<AudioManager>().Play("Switch");
                         activated = true;
                         startTime = Time.time;
-                    } else {
-                        PlayerController pc = FindObjectOfType<PlayerController>();
-                        if (pc.getCoin() >= doorCost) {
-                            pc.removeCoin(doorCost);
-                            doorLeftRot = interactableLeft.transform.localRotation;
-                            doorRightRot = interactableRight.transform.localRotation;
-                            FindObjectOfType<AudioManager>().Play("Gate");
-                            activated = true;
-                            startTime = Time.time;
-                        }
                     }
+                } else {
+                    PlayerController pc = FindObjectOfType<PlayerController>();
+                    if (pc.getCoin() >= doorCost) {
+                        pc.removeCoin(doorCost);
+                        doorLeftRot = interactableLeft.transform.localRotation;
+                        doorRightRot = interactableRight.transform.localRotation;
+                        FindObjectOfType<AudioManager>().Play("Gate");
+                        activated = true;
+                        startTime = Time.time;
+                    }
+                }
     }
 
     public void SetSwitch() {
