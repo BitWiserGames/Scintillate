@@ -2975,6 +2975,7 @@ MonoBehaviour:
   - {fileID: 8400000, guid: 7f481cf7499fa334688ce3efca285cf6, type: 2}
   - {fileID: 8400000, guid: 0c40b8ab1a6da934e8677d04bd3b4da5, type: 2}
   - {fileID: 8400000, guid: 606f59501c6e8364baefadacaa5b57e6, type: 2}
+  audioManager: {fileID: 822029701}
   pauseMenu: {fileID: 1280346607}
   costText: {fileID: 1559283010}
   loseScreen: {fileID: 1596177071}
