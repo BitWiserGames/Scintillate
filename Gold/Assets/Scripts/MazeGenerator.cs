@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [Flags]
 public enum WallState {
@@ -123,7 +124,7 @@ public static class MazeGenerator {
                     break;
                 }
 
-                bool passedDistanceCheck = true;                
+                bool passedDistanceCheck = true;
 
                 for (int j = 0; j < i; ++j) {
                     float distance = Vector3.Distance(new Vector3(x, 0, y), switchLocations[j]);
@@ -138,11 +139,13 @@ public static class MazeGenerator {
 
                 ++attempts;
 
-                if (attempts >= 20) {
+                if (attempts >= 20 && !switchLocations.Contains(new Vector3(x, 0, y))) {// Make sure no 2 switches are in the same spot
                     Debug.Log("Failed to find placement");
                     valid = true;
                 }
             }
+
+
             maze[x, y] |= WallState.POWER_SWITCH;
             switchLocations[i] = new Vector3(x, 0, y);
         }

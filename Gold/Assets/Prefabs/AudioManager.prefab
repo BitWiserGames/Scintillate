@@ -128,3 +128,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: WinSong
+    clip: {fileID: 8300000, guid: f53d0ff70c5ef954d8c55f109efa234d, type: 3}
+    group: {fileID: 2905102364251620307, guid: 7e34a167d801fa8498b6225346ade0fc, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
