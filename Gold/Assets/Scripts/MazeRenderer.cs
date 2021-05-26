@@ -57,7 +57,7 @@ public class MazeRenderer : MonoBehaviour {
                 if (x != 0 || y != 0) {
                     if (cell.HasFlag(WallState.COIN)) {
                         Transform coin = Instantiate(coinPrefab, transform);
-                        coin.position = position + new Vector3(0, 1.7f, 0);
+                        coin.position = position + new Vector3(0, 2f, 0);
                     }
 
                     if (cell.HasFlag(WallState.UP)) {

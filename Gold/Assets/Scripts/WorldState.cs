@@ -40,8 +40,18 @@ public class WorldState : MonoBehaviour {
         ++switchesActivated;
 
         if (switchesActivated >= switchesNeeded) {
-            WinGame();
+            StartCoroutine(WinGameCo());
         }
+    }
+
+    IEnumerator WinGameCo() {
+
+        cam.backgroundColor = new Color(49, 77, 121);
+        sun.enabled = true;
+
+        yield return new WaitForSeconds(2);
+
+        WinGame();
     }
 
     public void WinGame() {
