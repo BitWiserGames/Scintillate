@@ -72,29 +72,32 @@ public class EnemyController : MonoBehaviour {
 
                 agent.speed = 3.5f;
             }
-            RenderTexture tmpTexture = RenderTexture.GetTemporary(lightCheckTexture.width, lightCheckTexture.height, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
-            Graphics.Blit(lightCheckTexture, tmpTexture);
 
-            RenderTexture previousTexture = RenderTexture.active;
+            if (Vector3.Distance(transform.position, player.transform.position) <= 20) {
+                RenderTexture tmpTexture = RenderTexture.GetTemporary(lightCheckTexture.width, lightCheckTexture.height, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
+                Graphics.Blit(lightCheckTexture, tmpTexture);
 
-            RenderTexture.active = tmpTexture;
+                RenderTexture previousTexture = RenderTexture.active;
 
-            Texture2D tmp2DTexture = new Texture2D(lightCheckTexture.width, lightCheckTexture.height);
-            tmp2DTexture.ReadPixels(new Rect(0, 0, tmpTexture.width, tmpTexture.height), 0, 0);
-            tmp2DTexture.Apply();
+                RenderTexture.active = tmpTexture;
 
-            RenderTexture.active = previousTexture;
-            RenderTexture.ReleaseTemporary(tmpTexture);
+                Texture2D tmp2DTexture = new Texture2D(lightCheckTexture.width, lightCheckTexture.height);
+                tmp2DTexture.ReadPixels(new Rect(0, 0, tmpTexture.width, tmpTexture.height), 0, 0);
+                tmp2DTexture.Apply();
 
-            Color32[] colors = tmp2DTexture.GetPixels32();
+                RenderTexture.active = previousTexture;
+                RenderTexture.ReleaseTemporary(tmpTexture);
 
-            lightLevel = 0;
-            for (int i = 0; i < colors.Length; ++i) {
-                lightLevel += (0.2126f * colors[i].r) + (0.7152f * colors[i].g) + (0.0722f * colors[i].b);
-            }
+                Color32[] colors = tmp2DTexture.GetPixels32();
 
-            if (lightLevel > 8000) {
-                SetTarget(player.transform.position);
+                lightLevel = 0;
+                for (int i = 0; i < colors.Length; ++i) {
+                    lightLevel += (0.2126f * colors[i].r) + (0.7152f * colors[i].g) + (0.0722f * colors[i].b);
+                }
+
+                if (lightLevel > 8000) {
+                    SetTarget(player.transform.position);
+                }
             }
 
             float dist = agent.remainingDistance;
