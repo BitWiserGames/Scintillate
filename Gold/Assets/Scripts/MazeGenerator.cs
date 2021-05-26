@@ -73,9 +73,9 @@ public static class MazeGenerator {
                 if (rng.Next(0, 100) <= 7) {
                     bool valid = true;
 
-                    for (int i = current.X - 1; i < current.X + 1; ++i) {
-                        for (int j = current.Y - 1; j < current.Y + 1; ++j) {
-                            if (i >= 0 && i < width && j >= 0 && j < height)
+                    for (int j = current.Y - 1; j <= current.Y + 1; ++j) { // y
+                        for (int i = current.X - 1; i <= current.X + 1; ++i) { // x
+                            if (i >= 0 && i < width && j >= 0 && j < height) // within bounds
                                 if (maze[i, j].HasFlag(WallState.COIN)) {
                                     valid = false;
                                     break;
@@ -87,14 +87,14 @@ public static class MazeGenerator {
                     if (valid) {
                         maze[current.X, current.Y] |= WallState.COIN;
                         ++currentCoins;
-
-                        if (currentCoins == 5) {
-                            currentCoins = 0;
-
-                            maze[current.X, current.Y] |= WallState.GATE;
-                            maze[nPosition.X, nPosition.Y] |= WallState.GATE_PAIR;
-                        }
                     }
+                }
+
+                if (currentCoins >= 5 && rng.Next(0, 100) <= 25) {
+                    currentCoins = 0;
+
+                    maze[current.X, current.Y] |= WallState.GATE;
+                    maze[nPosition.X, nPosition.Y] |= WallState.GATE_PAIR;
                 }
 
                 maze[nPosition.X, nPosition.Y] |= WallState.VISITED;
@@ -103,12 +103,11 @@ public static class MazeGenerator {
             }
         }
 
+        // Generate switches
+
         Vector3[] switchLocations = new Vector3[3];
         float distanceRequired = (Mathf.Min(MazeRenderer.width, MazeRenderer.height)) / 2f;
 
-        Vector3 testLocation = new Vector3(1, 1, 1);
-
-        // Generate switches
         for (int i = 0; i < 3; ++i) {
             bool valid = false;
             int attempts = 0;
@@ -212,8 +211,8 @@ public static class MazeGenerator {
 
         WallState init = WallState.RIGHT | WallState.LEFT | WallState.UP | WallState.DOWN;
 
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
                 maze[x, y] = init;
             }
         }
