@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour {
@@ -8,7 +6,7 @@ public class MouseLook : MonoBehaviour {
     [SerializeField]
     Transform playerBody;
 
-    public static float mouseMult = 1.0f;
+    public static float mouseMult = 0f;
 
     public GameObject setTarget;
     public GameObject camTarget;
