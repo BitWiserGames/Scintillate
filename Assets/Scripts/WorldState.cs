@@ -19,6 +19,9 @@ public class WorldState : MonoBehaviour {
     public GameObject costText;
     public GameObject loseScreen;
     public GameObject winScreen;
+    public GameObject switchTextGO;
+
+    public TMPro.TMP_Text switchText;
 
     Camera cam;
 
@@ -43,6 +46,8 @@ public class WorldState : MonoBehaviour {
 
     public void ActivateSwitch() {
         ++switchesActivated;
+
+        switchText.text = switchesActivated.ToString();
 
         if (switchesActivated >= switchesNeeded) {
             StartCoroutine(WinGameCo());
@@ -98,6 +103,8 @@ public class WorldState : MonoBehaviour {
         cam = FindObjectOfType<Camera>();
 
         startSkyBox = cam.backgroundColor;
+
+        switchTextGO.SetActive(true);
 
         Interactable[] interactables = FindObjectsOfType<Interactable>();
 
