@@ -4,8 +4,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuController : MonoBehaviour
-{
+public class MenuController : MonoBehaviour {
     public static float masterVal = 1f;
     public static float sfxVal = 1f;
     public static float musicVal = 1f;
@@ -22,8 +21,10 @@ public class MenuController : MonoBehaviour
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Confined;
-        
-        sensitivity.value = MouseLook.mouseMult;
+        if (MouseLook.mouseMult < 0.25f)
+            sensitivity.value = 1.0f;
+        else
+            sensitivity.value = MouseLook.mouseMult;
         master.value = Mathf.Pow(10f, masterVal / 20f);
         sfx.value = Mathf.Pow(10f, sfxVal / 20f);
         music.value = Mathf.Pow(10f, musicVal / 20f);
@@ -55,7 +56,7 @@ public class MenuController : MonoBehaviour
     IEnumerator LoadAsynchronously(int index) {
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);
 
-        while(!operation.isDone) {
+        while (!operation.isDone) {
             float prog = Mathf.Clamp01(operation.progress / .9f);
             loadingBar.value = prog;
 
