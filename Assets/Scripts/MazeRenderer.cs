@@ -50,8 +50,8 @@ public class MazeRenderer : MonoBehaviour {
         floor.localScale = new Vector3((width / 10f) * size, 1 * size, (height / 10f) * size);
         floor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(width * size, height * size);
 
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
                 WallState cell = maze[x, y];
                 Vector3 position = new Vector3((-width / 2f + x) * size, 0, (-height / 2f + y) * size);
                 if (x != 0 || y != 0) {
