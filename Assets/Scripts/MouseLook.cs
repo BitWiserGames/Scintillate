@@ -1,12 +1,12 @@
 using UnityEngine;
 
 public class MouseLook : MonoBehaviour {
-    public float mouseSensitivity = 500f;
+    private float mult = 100f;
 
     [SerializeField]
     Transform playerBody;
 
-    public static float mouseMult = 0f;
+    //public static float mouseMult;
 
     public GameObject setTarget;
     public GameObject camTarget;
@@ -21,8 +21,8 @@ public class MouseLook : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (!WorldState.IsPaused()) {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * mouseMult * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * mouseMult * Time.deltaTime;
+            float mouseX = Input.GetAxis("Mouse X") * mult * MenuController.sen * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mult * MenuController.sen * Time.deltaTime;
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 65f);

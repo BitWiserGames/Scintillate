@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldState : MonoBehaviour {
@@ -35,7 +34,7 @@ public class WorldState : MonoBehaviour {
 
     public static Transform[] enemies = new Transform[4];
 
-    private static int switchesActivated = 0;
+    private static int switchesActivated;
     private static int switchesNeeded = 3;
 
     public void SetLookingAtDoor(bool state) {
@@ -138,7 +137,7 @@ public class WorldState : MonoBehaviour {
     private void Start() {
         am = FindObjectOfType<AudioManager>();
 
-        pauseMenu.SetActive(false);
+        switchesActivated = 0;
         loseScreen.SetActive(false);
         winScreen.SetActive(false);
     }
